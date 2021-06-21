@@ -1,0 +1,28 @@
+/* css*/
+body {
+    font-family: 'Cairo', sans-serif; 
+    color:#fff;
+    background-color: #a01616;
+}
+header {
+    background-color: #000;
+}
+main {
+    
+}
+header h1 {
+    font-size: 18px; 
+    text-align: right;
+    padding: 5px;
+}
+.display-m-100 {
+    width:100%;
+    flex-direction: row;
+}
+@media screen and (min-width: 600px) {
+    .display-m-100 {
+        width:33%;
+        flex-direction: column;
+    }
+  }
+
