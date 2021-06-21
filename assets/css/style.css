@@ -24,5 +24,32 @@ header h1 {
         width:33%;
         flex-direction: column;
     }
-  }
+    .picto {
+        padding:20px auto;
+    }
+  } /* end media*/
 
+  /* top menu */
+  ul.top-menu {
+      /*position: absolute;*/
+      top:4px;
+      right: 4px;
+      height: 40px;
+      width:80px;
+      margin: 0;
+      padding: 0;
+  }
+  ul.top-menu li {
+    display:inline-block;
+    width:40%;
+    margin:2%;
+    
+}
+@media screen and (max-width: 450px) {
+    
+    .logo  {
+        width:70%;
+        text-align: left;
+        margin:0;
+    }
+  } /* end media*/
