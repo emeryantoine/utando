@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="fr" dir="ltr">
 
 <head>
@@ -27,7 +27,7 @@
             <a class="" href="main.php"><img class="img-fluid m-auto" src="assets/img/logo.png" alt="Utando Chocolat"></a>
         </div>
         <?php if (!empty($_SESSION['me'])) {  ?>
-        
+            
         <nav>
             <ul class="top-menu position-absolute">
                 <li class="p-6 inline-block"> <a title="Desconnexion" href="login.php">

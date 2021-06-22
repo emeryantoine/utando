@@ -1,4 +1,5 @@
 <?php include 'sessions.php'; ?>
+<!DOCTYPE html>
 <?php include 'header.php'; ?>
 
 <!-- content login -->
@@ -19,7 +20,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="password-login" class="form-label">Mot de passe: </label>
-                        <input type="password" class="form-control <?= !isset($_POST['Connexion']) ? null : (isset($formErrorListLogin['password-login']) ? 'is-invalid' : 'is-valid') ?>" id="password-login" name="password-login" value="<?= !isset($password) ? null : $password ?>" />
+                        <input type="password" class="form-control <?= !isset($_POST['Connexion']) ? null : (isset($formErrorListLogin['password-login']) ? 'is-invalid' : 'is-valid') ?>" id="password-login" name="password-login" value="<?= !isset($pass) ? null : $pass ?>" />
                         <?php if (isset($formErrorListLogin['password-login'])) { ?>
                             <p><small class="badge bg-danger"><?= $formErrorListLogin['password-login'] ?></small></p>
                         <?php } ?>

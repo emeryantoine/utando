@@ -61,9 +61,10 @@ $users = [
                 'description' => 'Bisbal quitte assez tôt l\'école parce qu\'il n\'aime pas étudier. Il trouve un travail dans une pépinière. C\'est là qu\'il est découvert, alors qu\'il travaille en chantant.' ]
 ]; // end main tableau 
 
-if (empty($_POST)) {
+if (!isset($_SESSION['users'])) {
     $_SESSION['users'] = $users;
 }
+
 
 //Création du tableau permettant de contruire la liste déroulante des choix des chocolat 
 $chocolateList = ['Noir' => 'chocolat noir', 'Lait' => 'chocolat au lait', 'Blanc' => 'chocolat blanc'];
@@ -203,6 +204,7 @@ if (isset($_POST['register'])) {
     }
 
 }
+
 if (isset($_POST['Connexion'])) {
     $formErrorListLogin = [];
     if(!empty($_POST['pseudo-login'])){
@@ -222,7 +224,7 @@ if (isset($_POST['Connexion'])) {
         if(key_exists($login,$_SESSION['users'])){
             if ($_SESSION['users'][$login]['password'] == $passwordLogin) {
                 $_SESSION['me']= $login;
-                header(('Location: http://utando.fr/main.php'));
+                header('Location: http://utando.fr/main.php');
             }else{
                 $formErrorListLogin = 'Votre pseudo ou votre mot de passe est inexistant';
             }
