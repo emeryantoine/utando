@@ -19,13 +19,17 @@ $users = [
                 'music' => ['Pop','Rap'],
                 'description' => '' ]
 ];
+
 if (empty($_POST)) {
     $_SESSION['users'] = $users;
 }
 
-//Création du tableau permettant de contruire la liste déroulante des choix de civilités
+//Création du tableau permettant de contruire la liste déroulante des choix des chocolat 
 $chocolateList = ['Noir' => 'chocolat noir', 'Lait' => 'chocolat au lait', 'Blanc' => 'chocolat blanc'];
 $musicList = ['Rap', 'Pop', 'Rock', 'Classique', 'RnB'];
+$_SESSION['chocolat'] = $chocolateList;
+$_SESSION['music'] = $musicList;
+
 define('IMG_FOLDER','assets/profil/');
 //On vérifie que le formulaire a bien été soumis
 if (isset($_POST['register'])) {
@@ -136,7 +140,7 @@ if (isset($_POST['register'])) {
             $formErrorList['music'] = 'Renseigner correctement votre choix';
         }
     } else {
-        $formErrorList['music'] = 'Choisissez au moins style de musique';
+        $formErrorList['music'] = 'Choisissez au moins un style de musique';
     }
     // on charge la photo dans le dossier
     if(empty($formErrorList)){
@@ -152,6 +156,7 @@ if (isset($_POST['register'])) {
                             'description' => '' ];
                             $users_tmp[$pseudo] = $tmp;
         $_SESSION['users'] = $users_tmp;
+        
 
     }
 
@@ -174,8 +179,8 @@ if (isset($_POST['Connexion'])) {
     if ($formErrorListLogin == null) {
         if(key_exists($login,$_SESSION['users'])){
             if ($_SESSION['users'][$login]['password'] == $passwordLogin) {
-                echo 'lol================================================';
-               header(('Location: http://utando.fr/main.php'));
+                $_SESSION['me']= $login;
+                header(('Location: http://utando.fr/main.php'));
             }else{
                 $formErrorListLogin = 'Votre pseudo ou votre mot de passe est inexistant';
             }
