@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $users = [
     'demo1' => ['password' => 'azertyuiop', 
                 'age' => '45',
@@ -7,7 +7,8 @@ $users = [
                 'orientation' => 'homo',
                 'image' => './assets/profil/icons8-safety-helmet-30.png',
                 'chocolat' => 'Noir',
-                'music' => ['Pop','Rap']],
+                'music' => ['Pop','Rap'],
+                'description' => '' ],
 
     'demo2' => ['password' => 'azertyuio', 
                 'age' => '45',
@@ -15,11 +16,13 @@ $users = [
                 'orientation' => 'homo',
                 'image' => './assets/profil/icons8-safety-helmet-30.png',
                 'chocolat' => 'Noir',
-                'music' => ['Pop','Rap']]
+                'music' => ['Pop','Rap'],
+                'description' => '' ]
 ];
-echo '<pre>';
-        var_dump($users['demo1']['music'][0]);
-        echo '</pre>';
+if (empty($_POST)) {
+    $_SESSION['users'] = $users;
+}
+
 //Création du tableau permettant de contruire la liste déroulante des choix de civilités
 $chocolateList = ['Noir' => 'chocolat noir', 'Lait' => 'chocolat au lait', 'Blanc' => 'chocolat blanc'];
 $musicList = ['Rap', 'Pop', 'Rock', 'Classique', 'RnB'];
@@ -34,7 +37,7 @@ if (isset($_POST['register'])) {
     if (!empty($_POST['pseudo'])) {
         //Qu'il correspond bien à un format valide
         if (preg_match($regexName, $_POST['pseudo'])) {
-            $firstname = htmlspecialchars($_POST['pseudo']);
+            $pseudo = htmlspecialchars($_POST['pseudo']);
         } else {
             $formErrorList['pseudo'] = 'Votre pseudo doit comporter au moins 5 caractères (chiffre, lettre, accent et séparateur : - _ .)';
         }
@@ -78,7 +81,7 @@ if (isset($_POST['register'])) {
     // on vérifie l'orientation
     if (isset($_POST['orientation'])) {
         if ($_POST['orientation'] == 'hétéro' || $_POST['orientation'] == 'homo' || $_POST['orientation'] == 'bi') {
-            $gender = htmlspecialchars($_POST['orientation']);
+            $orientation = htmlspecialchars($_POST['orientation']);
         } else {
             $formErrorList['orientation'] = 'Veuillez renseignez correctement votre orientation';
         }
@@ -98,7 +101,6 @@ if (isset($_POST['register'])) {
                 'jpg' => 'image/jpeg'
             ];
             $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-            var_dump($extension);
             if (!in_array($typeMime, $allowedTypes) || !array_key_exists($extension, $allowedTypes)) {
                 $formErrors['image'] = 'Ce fichier n\'est pas une image';
             }
@@ -121,9 +123,6 @@ if (isset($_POST['register'])) {
     }
     //ON vérifie le genre musical
     if (isset($_POST['music'])) {
-        /* echo '<pre>';
-        var_dump($_POST['music']);
-        echo '</pre>'; */
         $valide = true;
         foreach ($_POST['music'] as $value) {
             if (!in_array($value, $musicList)) {
@@ -140,12 +139,22 @@ if (isset($_POST['register'])) {
         $formErrorList['music'] = 'Choisissez au moins style de musique';
     }
     // on charge la photo dans le dossier
-    if(empty($formErrors)){
-        mkdir('./assets');
-        mkdir('./' . IMG_FOLDER);
+    if(empty($formErrorList)){
         move_uploaded_file($tmpFile, IMG_FOLDER . $_FILES['image']['name']);
-        exit;
+        $users_tmp = $_SESSION['users'];
+        $tmp = ['password' => $pass, 
+                            'age' => $age,
+                            'gender' => $gender,
+                            'orientation' => $orientation,
+                            'image' => IMG_FOLDER . $_FILES['image']['name'],
+                            'chocolat' => $chocolat,
+                            'music' => $music,
+                            'description' => '' ];
+                            $users_tmp[$pseudo] = $tmp;
+        $_SESSION['users'] = $users_tmp;
+
     }
+
 }
 if (isset($_POST['Connexion'])) {
     $formErrorListLogin = [];
@@ -163,9 +172,10 @@ if (isset($_POST['Connexion'])) {
         $formErrorListLogin['password-login'] = 'Veuillez entrer votre mot de passe';
     }
     if ($formErrorListLogin == null) {
-        if(key_exists($login,$users)){
-            if ($users[$login]['password'] == $passwordLogin) {
-               echo 'bravo';
+        if(key_exists($login,$_SESSION['users'])){
+            if ($_SESSION['users'][$login]['password'] == $passwordLogin) {
+                echo 'lol================================================';
+               header(('Location: http://utando.fr/main.php'));
             }else{
                 $formErrorListLogin = 'Votre pseudo ou votre mot de passe est inexistant';
             }
@@ -190,14 +200,13 @@ if (isset($_POST['Connexion'])) {
 </head>
 
 <body>
-
     <div class="container">
         <div class="row mt-5">
             <div class="col-4 offset-1" id="leftSide">
                 <img class="img-fluid" src="assets/img/leftSide.jpg" />
                 <div class="card-body">
                     <h1 class="card-title h2 mb-5 ">Formulaire d'inscription</h1>
-                    <form action="index.php" method="POST">
+                    <form action="?" method="POST">
                         <div class="mb-3">
                             <label for="pseudo-login" class="form-label">Pseudo : </label>
                             <input type="text" class="form-control <?= !isset($_POST['Connexion']) ? null : (isset($formErrorListLogin['pseudo-login']) ? 'is-invalid' : 'is-valid') ?>" id="pseudo-login" name="pseudo-login" value="<?= !isset($pseudo) ? null : $pseudo ?>" />
@@ -224,14 +233,14 @@ if (isset($_POST['Connexion'])) {
                     <form action="?" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="pseudo" class="form-label">Pseudo : </label>
-                            <input type="text" class="form-control <?= !isset($_POST['register']) ? null : (isset($formErrorList['pseudo']) ? 'is-invalid' : 'is-valid') ?>" id="pseudo" name="pseudo" value="<?= !isset($society) ? null : $society ?>" />
+                            <input type="text" class="form-control <?= !isset($_POST['register']) ? null : (isset($formErrorList['pseudo']) ? 'is-invalid' : 'is-valid') ?>" id="pseudo" name="pseudo" value="<?= !isset($pseudo) ? null : $pseudo ?>" />
                             <?php if (isset($formErrorList['pseudo'])) { ?>
                                 <p><small class="badge bg-danger"><?= $formErrorList['pseudo'] ?></small></p>
                             <?php } ?>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Mot de passe: </label>
-                            <input type="password" class="form-control <?= !isset($_POST['register']) ? null : (isset($formErrorList['password']) ? 'is-invalid' : 'is-valid') ?>" id="password" name="password" value="<?= !isset($society) ? null : $society ?>" />
+                            <input type="password" class="form-control <?= !isset($_POST['register']) ? null : (isset($formErrorList['password']) ? 'is-invalid' : 'is-valid') ?>" id="password" name="password" value="<?= !isset($pass) ? null : $pass ?>" />
                             <?php if (isset($formErrorList['password'])) { ?>
                                 <p><small class="badge bg-danger"><?= $formErrorList['password'] ?></small></p>
                             <?php } ?>
