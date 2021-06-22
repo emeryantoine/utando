@@ -15,7 +15,7 @@
     <!-- google fonts  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css?12345">
+    <link rel="stylesheet" href="assets/css/style.css?1234567">
 
 </head>
 
@@ -27,7 +27,7 @@
             <a class="" href="main.php"><img class="img-fluid m-auto" src="assets/img/logo.png" alt="Utando Chocolat"></a>
         </div>
         <?php if (!empty($_SESSION['me'])) {  ?>
-            
+        <!-- menu connexion-->
         <nav>
             <ul class="top-menu position-absolute">
                 <li class="p-6 inline-block"> <a title="Desconnexion" href="login.php">
@@ -38,6 +38,10 @@
                 </li>
             </ul>
         </nav>
+        <!-- notre photo profil-->
+        <div class="photo-me">
+            <img class="img-fluid rounded-circle  border-light border border-1" src="<?= $_SESSION['users'][$_SESSION['me']]['image'] ?>" alt="Connexion"></a>
+        </div>
         <?php } ?>
     
         <h1 class="m-0 p-6 fs-5 text-center ">Un site de rencontres avec chocolat et fraises</h1>

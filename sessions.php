@@ -9,7 +9,7 @@ $users = [
                 'image' => './assets/profile/profile-shakira.jpg',
                 'chocolat' => 'Lait',
                 'music' => ['Pop','Rock'],
-                'description' => 'De son nom complet Shakira Isabel Mebarak Ripoll, née le 2 février 1977 à Barranquilla (Colombie), est une auteure-compositrice-interprète colombienne.',
+                'description' => 'Mon nom complet est Shakira Isabel Mebarak Ripoll, je suis née le 2 février 1977 à Barranquilla (Colombie), est je suis une auteure-compositrice-interprète colombienne.',
                 'message' => 'Waka Waka' ],
 
     'Tony' => ['password' => 'pwtony', 
@@ -19,7 +19,7 @@ $users = [
                 'image' => './assets/profile/profile-tony.jpg',
                 'chocolat' => 'Noir',
                 'music' => ['Pop','RnB'],
-                'description' => 'Toni Michele Braxton, née le 7 octobre 1967 à Severn, dans le comté d\'Anne Arundel (Maryland), est une chanteuse, pianiste, musicienne, productrice, actrice, personnalité médiatique et philanthrope américaine',
+                'description' => 'Je suis Toni Michele Braxton, née le 7 octobre 1967 à Severn, dans le comté d\'Anne Arundel (Maryland), est je suis une chanteuse, pianiste, musicienne, productrice, actrice, personnalité médiatique et philanthrope américaine',
                 'message' => 'Un-Break My Heart' ],  
 
     'Barbara' => ['password' => 'pwbarbara', 
@@ -29,7 +29,7 @@ $users = [
                 'image' => './assets/profile/profile-barbara.jpg',
                 'chocolat' => 'Blanc',
                 'music' => ['Pop','Classique'],
-                'description' => 'Barbara Streisand naît le 24 avril 1942 dans le quartier de Brooklyn à New York, au sein d\'une famille juive ashkénaze de la petite bourgeoisie.',
+                'description' => 'Je suis Barbara Streisand, naît le 24 avril 1942 dans le quartier de Brooklyn à New York, au sein d\'une famille juive ashkénaze de la petite bourgeoisie.',
                 'message' => 'People who needs people' ],
 
     'Bruce' => ['password' => 'pwbruce', 
@@ -39,7 +39,7 @@ $users = [
                 'image' => './assets/profile/profile-bruce.jpg',
                 'chocolat' => 'Blanc',
                 'music' => ['Pop','Rock','Classique'],
-                'description' => 'Il est l\'un des artistes les plus populaires aux États-Unis, avec plus de 64 millions d\'albums écoulés, pour un total de plus de 120 millions à travers le monde',
+                'description' => 'Je suis l\'un des artistes les plus populaires aux États-Unis, avec plus de 64 millions d\'albums écoulés, pour un total de plus de 120 millions à travers le monde',
                 'message' => 'Born in the U.S.A' ],
 
     'Will' => ['password' => 'pwwill', 
@@ -49,7 +49,8 @@ $users = [
                 'image' => './assets/profile/profile-will.jpg',
                 'chocolat' => 'Noir',
                 'music' => ['Rap', 'Pop', 'Rock', 'Classique', 'RnB'],
-                'description' => 'Il est l\'un des rares artistes à avoir connu le succès dans trois différents médias de divertissement aux États-Unis et dans le monde : cinéma, télévision et musique.' ],
+                'description' => 'Je suis l\'un des rares artistes à avoir connu le succès dans trois différents médias de divertissement aux États-Unis et dans le monde : cinéma, télévision et musique.',
+                'message' => 'Je suis le prince de Bel air' ],
 
     'Bisbal' => ['password' => 'pwbisbal', 
                 'age' => '42',
@@ -58,7 +59,8 @@ $users = [
                 'image' => './assets/profile/profile-bisbal.jpg',
                 'chocolat' => 'Blanc',
                 'music' => ['Pop','Rock'],
-                'description' => 'Bisbal quitte assez tôt l\'école parce qu\'il n\'aime pas étudier. Il trouve un travail dans une pépinière. C\'est là qu\'il est découvert, alors qu\'il travaille en chantant.' ]
+                'description' => 'J\'ai quitte assez tôt l\'école parce que je n\'aime pas étudier. J\'ai trouve un travail dans une pépinière. C\'est là que je suis découvert, alors que je travaille en chantant.' ,
+                'message' => 'Ave Maria !' ]
 ]; // end main tableau 
 
 if (!isset($_SESSION['users'])) {
@@ -67,7 +69,7 @@ if (!isset($_SESSION['users'])) {
 
 
 //Création du tableau permettant de contruire la liste déroulante des choix des chocolat 
-$chocolateList = ['Noir' => 'chocolat noir', 'Lait' => 'chocolat au lait', 'Blanc' => 'chocolat blanc'];
+$chocolateList = ['Noir' => 'Chocolat noir', 'Lait' => 'Chocolat au lait', 'Blanc' => 'Chocolat blanc'];
 $musicList = ['Rap', 'Pop', 'Rock', 'Classique', 'RnB', 'Heavy', 'Gothique', 'Blues', 'Jazz', 'Reagea', 'Techno'];
 $_SESSION['chocolat'] = $chocolateList;
 $_SESSION['music'] = $musicList;
