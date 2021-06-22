@@ -19,7 +19,8 @@
 
 </head>
 
-<body>
+<body class="<?= false ? 'rouge' : 'bleu' ?>"> 
+<!--CHANGER COLOR-->
 
     <!-- header -->
     <header class=" text-center position-relative">

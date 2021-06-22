@@ -1,6 +1,8 @@
 <?php
 session_start();
-$_SESSION['me'] = '';
+if($_SERVER['REQUEST_URI'] == '/login.php'){
+    $_SESSION['me'] = '';
+}
 $users = [
     'Shaki' => ['password' => 'pwshaki', 
                 'age' => '45',
@@ -73,12 +75,136 @@ $chocolateList = ['Noir' => 'Chocolat noir', 'Lait' => 'Chocolat au lait', 'Blan
 $musicList = ['Rap', 'Pop', 'Rock', 'Classique', 'RnB', 'Heavy', 'Gothique', 'Blues', 'Jazz', 'Reagea', 'Techno'];
 $_SESSION['chocolat'] = $chocolateList;
 $_SESSION['music'] = $musicList;
-
+$regexAge = '/^[1-9][0-9]?$/';
 define('IMG_FOLDER','assets/profile/');
+// On vérifie les updates
+if (isset($_POST['update'])){
+    //On vérifie le mdp
+    $updateErrorList = [];
+    if (!empty($_POST['password'])) {
+        $pass = htmlspecialchars($_POST['password']);
+        if (!(preg_match('@[0-9]@', $pass) && preg_match('@[A-Z]@', $pass) && preg_match('@[a-z]@', $pass) && strlen($pass) > 8)) {
+            $updateErrorList['password'] = 'Veuillez créer un mot de passe contenant au moins : une majuscule, une minuscule, un chiffre et 8 caractères';
+        }
+    } else {
+        $updateErrorList['password'] = 'Veuillez créer votre mot de passe';
+    }
+    //On vérifie que le champ age n'est pas vide
+    if (!empty($_POST['age'])) {
+        //Qu'il est bien compris entre 18 et 99
+        if (preg_match($regexAge, $_POST['age'])) {
+            if ($_POST['age'] >= 18) {
+                $age = htmlspecialchars($_POST['age']);
+            } else {
+                $updateErrorList['age'] = 'Vous devez être majeur';
+            }
+        } else {
+            $updateErrorList['age'] = 'Veuillez renseignez correctement votre age';
+        }
+    } else {
+        $updateErrorList['age'] = 'Veuillez renseigner votre age';
+    }
+    // on vérifie l'orientation
+    if (isset($_POST['orientation'])) {
+        if ($_POST['orientation'] == 'hétéro' || $_POST['orientation'] == 'homo' || $_POST['orientation'] == 'bi') {
+            $orientation = htmlspecialchars($_POST['orientation']);
+        } else {
+            $updateErrorList['orientation'] = 'Veuillez renseignez correctement votre orientation';
+        }
+    } else {
+        $updateErrorList['orientation'] = 'Veuillez renseignez votre orientation';
+    }
+    // Verification image choisie 
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        if ($_FILES['image']['size'] <= 1500000) {
+            $file = $_FILES['image']['name'];
+            $tmpFile = $_FILES['image']['tmp_name'];
+            $typeMime = mime_content_type($tmpFile);
+            $allowedTypes = [
+                'jpeg' => 'image/jpeg',
+                'png' => 'image/png',
+                'gif' => 'image/gif',
+                'jpg' => 'image/jpeg'
+            ];
+            $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+            if (!in_array($typeMime, $allowedTypes) || !array_key_exists($extension, $allowedTypes)) {
+                $updateErrorList['image'] = 'Ce fichier n\'est pas une image';
+            }
+        } else {
+            $updateErrorList['image'] = 'l\'image est trop lourd ou est mal téléchargé';
+        }
+    } else {
+        $updateErrorList['image'] = 'Veuillez sélectionner votre fichier';
+    }
+     //On vérifie le chocolat
+     if (!empty($_POST['chocolat'])) {
+        if (key_exists($_POST['chocolat'], $chocolateList)) {
+            $chocolat = htmlspecialchars($_POST['chocolat']);
+        } else {
+            $updateErrorList['chocolat'] = 'Choisissez correctement votre chocolat préferé';
+        }
+    } else {
+        $updateErrorList['chocolat'] = 'Choisissez votre chocolat préferé';
+    }
+    //ON vérifie le genre musical
+    if (isset($_POST['music'])) {
+        $valide = true;
+        foreach ($_POST['music'] as $value) {
+            if (!in_array($value, $musicList)) {
+                $valide = false;
+                break;
+            }
+        }
+        if ($valide) {
+            $music = $_POST['music'];
+        } else {
+            $updateErrorList['music'] = 'Renseigner correctement votre choix';
+        }
+    } else {
+        $updateErrorList['music'] = 'Choisissez au moins un style de musique';
+    }
+    // on check la description
+    if(!empty($_POST['description'])){
+        $description =htmlspecialchars($_POST['description']);
+    }else{
+        $updateErrorList['description'] = 'Remplir une description';
+    }
+    // on check la message
+    if(!empty($_POST['message'])){
+        $message =htmlspecialchars($_POST['message']);
+    }else{
+        $updateErrorList['message'] = 'Remplir un message';
+    }
+    // on charge la photo dans le dossier
+    if(empty($updateErrorList)){
+        move_uploaded_file($tmpFile, IMG_FOLDER . $_FILES['image']['name']);
+        $users_tmp = $_SESSION['users'];
+        $tmp = ['password' => $pass, 
+                            'age' => $age,
+                            'gender' => $_SESSION['users'][$_SESSION['me']]['gender'],
+                            'orientation' => $orientation,
+                            'image' => IMG_FOLDER . $_FILES['image']['name'],
+                            'chocolat' => $chocolat,
+                            'music' => $music,
+                            'description' => $description,
+                            'message' => $message ];
+                            $users_tmp[$_SESSION['me']] = $tmp;
+        $_SESSION['users'] = $users_tmp;
+        
+        header('Location: http://utando.fr/main.php');
+    }
+}
+
+
+
+
+
+
+
 //On vérifie que le formulaire a bien été soumis
 if (isset($_POST['register'])) {
     $regexName = '/^[A-z\d\-_.À-ú]{5,}$/';
-    $regexAge = '/^[1-9][0-9]?$/';
+    
     //Création du tableau d'erreur
     $formErrorList = [];
     //On vérifie que le champ pseudo n'est pas vide
