@@ -137,13 +137,6 @@ function compatibility(){
 
 
 </main>
-
-
-
-
-
 <?php include 'footer.php'; ?>
-
 </body>
-
 </html>

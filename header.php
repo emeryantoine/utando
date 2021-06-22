@@ -15,7 +15,7 @@
     <!-- google fonts  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css?1234">
+    <link rel="stylesheet" href="assets/css/style.css?12345">
 
 </head>
 
@@ -31,7 +31,7 @@
         <nav>
             <ul class="top-menu position-absolute">
                 <li class="p-6 inline-block"> <a title="Desconnexion" href="login.php">
-                        <img class="img-fluid" src="assets/img/on.png" alt="Connexion"></a>
+                    <img class="img-fluid" src="assets/img/on.png" alt="Connexion"></a>
                 </li>
                 <li class="p-6 inline-block"> <a title="Paramètres du compte" href="param.php">
                         <img class="img-fluid" src="assets/img/config.png" alt="Paramètres"></a>
@@ -39,5 +39,6 @@
             </ul>
         </nav>
         <?php } ?>
-        <h1 class="m-0 p-0 ">Un site de rencontres avec chocolat et fraises</h1>
+    
+        <h1 class="m-0 p-6 fs-5 text-center ">Un site de rencontres avec chocolat et fraises</h1>
     </header><!-- end header -->
