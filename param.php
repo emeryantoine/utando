@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 ?>
 <!DOCTYPE html>
@@ -10,6 +11,8 @@
     <title>Paramètres</title>
 </head>
 <body>
-    
+    <pre>
+        <?php var_dump($_SESSION['users']); ?>
+    </pre>
 </body>
 </html>
