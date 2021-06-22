@@ -3,30 +3,34 @@ body {
     font-family: 'Cairo', sans-serif; 
     color:#fff;
     background-color: #a01616;
+    font-size: 0.8rem;
 }
 header {
     background-color: #000;
 }
-main {
-    
+.picto a img {
+    opacity: 0.7;   
+}
+.picto a:hover img {
+    opacity: 1;   
 }
 header h1 {
     font-size: 18px; 
     text-align: right;
     padding: 5px;
 }
-.display-m-100 {
-    width:100%;
-    flex-direction: row;
+.profile img {
+   max-width: 380px;
+   width:90%;
 }
+.infos-profile {
+    background:rgba(0, 0, 0, 0.3) ;
+}
+
 @media screen and (min-width: 600px) {
-    .display-m-100 {
-        width:33%;
-        flex-direction: column;
-    }
-    .picto {
+    /*.picto {
         padding:20px auto;
-    }
+    }*/
   } /* end media*/
 
   /* top menu */
@@ -41,8 +45,8 @@ header h1 {
   }
   ul.top-menu li {
     display:inline-block;
-    width:40%;
-    margin:2%;
+    width:35%;
+    margin:2% 5%;
     
 }
 @media screen and (max-width: 450px) {

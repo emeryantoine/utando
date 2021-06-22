@@ -15,7 +15,7 @@
     <!-- google fonts  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css?xxdddggg">
+    <link rel="stylesheet" href="assets/css/style.css?1234">
 
 </head>
 
@@ -24,7 +24,7 @@
     <!-- header -->
     <header class=" text-center position-relative">
         <div class="logo">
-            <a class="" href="main.php"><img class="img-fluid m-auto" src="assets/img/logo-utando.jpg" alt="Utando Chocolat"></a>
+            <a class="" href="main.php"><img class="img-fluid m-auto" src="assets/img/logo.png" alt="Utando Chocolat"></a>
         </div>
         <nav>
             <ul class="top-menu position-absolute">
@@ -37,5 +37,5 @@
             </ul>
         </nav>
 
-        <h1 class="container">Un site de rencontres avec chocolat et fraises</h1>
+        <h1 class="m-0 p-0 ">Un site de rencontres avec chocolat et fraises</h1>
     </header><!-- end header -->
