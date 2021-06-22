@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['me'] = '';
 $users = [
     'Shaki' => ['password' => 'pwshaki', 
                 'age' => '45',
@@ -66,7 +67,7 @@ if (empty($_POST)) {
 
 //Création du tableau permettant de contruire la liste déroulante des choix des chocolat 
 $chocolateList = ['Noir' => 'chocolat noir', 'Lait' => 'chocolat au lait', 'Blanc' => 'chocolat blanc'];
-$musicList = ['Rap', 'Pop', 'Rock', 'Classique', 'RnB'];
+$musicList = ['Rap', 'Pop', 'Rock', 'Classique', 'RnB', 'Heavy', 'Gothique', 'Blues', 'Jazz', 'Reagea', 'Techno'];
 $_SESSION['chocolat'] = $chocolateList;
 $_SESSION['music'] = $musicList;
 

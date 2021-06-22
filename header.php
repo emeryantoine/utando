@@ -15,7 +15,7 @@
     <!-- google fonts  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css?1234">
+    <link rel="stylesheet" href="assets/css/style.css?12345">
 
 </head>
 
@@ -27,7 +27,7 @@
             <a class="" href="main.php"><img class="img-fluid m-auto" src="assets/img/logo.png" alt="Utando Chocolat"></a>
         </div>
 
-        <?php if (isset($_SESSION['me'])) { ?>
+        <?php if (!empty($_SESSION['me'])) { ?>
 
             <nav>
             <ul class="top-menu position-absolute">
