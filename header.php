@@ -26,16 +26,18 @@
         <div class="logo">
             <a class="" href="main.php"><img class="img-fluid m-auto" src="assets/img/logo.png" alt="Utando Chocolat"></a>
         </div>
+        <?php if (!empty($_SESSION['me'])) {  ?>
+        
         <nav>
             <ul class="top-menu position-absolute">
                 <li class="p-6 inline-block"> <a title="Desconnexion" href="login.php">
                         <img class="img-fluid" src="assets/img/on.png" alt="Connexion"></a>
                 </li>
-                <li class="p-6 inline-block"> <a title="Paramètres du compte" href="login.php">
+                <li class="p-6 inline-block"> <a title="Paramètres du compte" href="param.php">
                         <img class="img-fluid" src="assets/img/config.png" alt="Paramètres"></a>
                 </li>
             </ul>
         </nav>
-
+        <?php } ?>
         <h1 class="m-0 p-0 ">Un site de rencontres avec chocolat et fraises</h1>
     </header><!-- end header -->
