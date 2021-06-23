@@ -63,15 +63,15 @@
                         <legend>Orientation :</legend>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" for="orientation1">Hétéro</label>
-                            <input class="form-check-input" type="radio" name="orientation" id="orientation1" value="hétéro">
+                            <input class="form-check-input" type="radio" name="orientation" id="orientation1" value="hétéro" <?= ($_SESSION['users'][$_SESSION['me']]['orientation'] == 'hétéro')?'checked': '' ?> >
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" for="orientation2">Homo</label>
-                            <input class="form-check-input" type="radio" name="orientation" id="orientation2" value="homo">
+                            <input class="form-check-input" type="radio" name="orientation" id="orientation2" value="homo" <?= ($_SESSION['users'][$_SESSION['me']]['orientation'] == 'homo')?'checked': '' ?>>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" for="orientation3">Bi</label>
-                            <input class="form-check-input" type="radio" name="orientation" id="orientation3" value="bi">
+                            <input class="form-check-input" type="radio" name="orientation" id="orientation3" value="bi" <?= ($_SESSION['users'][$_SESSION['me']]['orientation'] == 'bi')?'checked': '' ?>>
 
                         </div>
                         <!-- error-->
@@ -94,11 +94,10 @@
                     <!-- choco-->
                     <fieldset class="mb-3">
                         <legend>Modifier ton chocolat ? :</legend>
-                        <select class="form-select mb-3 <?= !isset($_POST['update']) ?: (isset($updateErrorList['chocolat']) ? 'is-invalid' : 'is-valid') ?>" name="chocolat">
-                            <option selected disabled>Qu'est-ce que tu aimes?</option>
+                        <select class="form-select mb-3 <?= !isset($_POST['update']) ?: (isset($updateErrorList['chocolat']) ? 'is-invalid' : 'is-valid') ?>" name="chocolat" >
                             <?php
                             foreach ($chocolateList as $key => $value) { ?>
-                                <option <?= (isset($chocolat) && $chocolat == $value) ? 'selected' : null ?> value="<?= $key ?>"><?= $value ?></option>
+                                <option <?= ($_SESSION['users'][$_SESSION['me']]['chocolat'] == $key)?'selected': '' ?>  value="<?= $key ?>"><?= $value ?></option>
                             <?php } ?>
                         </select>
                         <!-- error-->
@@ -112,7 +111,7 @@
                         <?php
                         foreach ($musicList as $value) {
                         ?><div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="music[]" value="<?= $value ?>" id="<?= $value ?>">
+                                <input class="form-check-input" type="checkbox" name="music[]" value="<?= $value ?>" id="<?= $value ?>" <?= (in_array($value,$_SESSION['users'][$_SESSION['me']]['music']))?'checked': '' ?>>
                                 <label class="form-check-label" for="<?= $value ?>">
                                     <?= $value ?>
                                 </label>
@@ -125,6 +124,15 @@
                         </fieldset>
                         <hr>
                         <h2 class="card-title fs-4">Personnaliser votre thème</h2>
+                        <fieldset class="mb-3 col-md-6">
+                        <?php 
+                            foreach ($colorList as $value) { ?>
+                                <div class="form-check form-check-inline">
+                                    <label for="<?= $value ?>" class="form-check-label"><?= $value ?></label>
+                                    <input class="form-check-input" type="radio" name="color" id="<?= $value ?>" value="<?= $value ?>" <?= ($_COOKIE[$_SESSION['me']] == $value)? 'checked' : '' ?>>
+                                </div>
+                           <?php } ?>
+                        </fieldset>
 
                     <div class="mb-3">
                         <button class="btn btn-dark" type="submit" name="update">Modifier</button>

@@ -73,8 +73,16 @@ if (!isset($_SESSION['users'])) {
 //Création du tableau permettant de contruire la liste déroulante des choix des chocolat 
 $chocolateList = ['Noir' => 'Chocolat noir', 'Lait' => 'Chocolat au lait', 'Blanc' => 'Chocolat blanc'];
 $musicList = ['Rap', 'Pop', 'Rock', 'Classique', 'RnB', 'Heavy', 'Gothique', 'Blues', 'Jazz', 'Reagea', 'Techno'];
-$_SESSION['chocolat'] = $chocolateList;
-$_SESSION['music'] = $musicList;
+$colorList = ['rouge','bleu','vert','jaune'];
+if (empty($_SESSION['color'])) {
+    $_SESSION['color'] = $colorList;
+}
+if (empty($_SESSION['chocolat'])) {
+    $_SESSION['chocolat'] = $chocolateList;
+}
+if (empty($_SESSION['music'])) {
+    $_SESSION['music'] = $musicList;
+}
 $regexAge = '/^[1-9][0-9]?$/';
 define('IMG_FOLDER','assets/profile/');
 // On vérifie les updates
@@ -175,8 +183,16 @@ if (isset($_POST['update'])){
     }else{
         $updateErrorList['message'] = 'Remplir un message';
     }
+    if(!empty($_POST['color'])){
+        if(!in_array($_POST['color'],$colorList)){
+            $updateErrorList['color'] = 'Le thème selectionner n\'est pas valide';
+        }
+    }else{
+        $updateErrorList['color'] = 'Veuillez choisir une thème';
+    }
     // on charge la photo dans le dossier
     if(empty($updateErrorList)){
+        setcookie($_SESSION['me'],$_POST['color'],time()+ 3600*24*30,"/");
         move_uploaded_file($tmpFile, IMG_FOLDER . $_FILES['image']['name']);
         $users_tmp = $_SESSION['users'];
         $tmp = ['password' => $pass, 
@@ -276,13 +292,13 @@ if (isset($_POST['register'])) {
             ];
             $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
             if (!in_array($typeMime, $allowedTypes) || !array_key_exists($extension, $allowedTypes)) {
-                $formErrors['image'] = 'Ce fichier n\'est pas une image';
+                $formErrorList['image'] = 'Ce fichier n\'est pas une image';
             }
         } else {
-            $formErrors['image'] = 'l\'image est trop lourd ou est mal téléchargé';
+            $formErrorList['image'] = 'l\'image est trop lourd ou est mal téléchargé';
         }
     } else {
-        $formErrors['image'] = 'Veuillez sélectionner votre fichier';
+        $formErrorList['image'] = 'Veuillez sélectionner votre fichier';
     }
     
     //On vérifie le chocolat
@@ -339,25 +355,26 @@ if (isset($_POST['Connexion'])) {
         $login = htmlspecialchars($_POST['pseudo-login']);
         
     }else{
-        $formErrorListLogin['pseudo-login'] = 'Veuillez entrer votre pseudo';
+        $formErrorListLogin['error'] = 'Votre pseudo ou votre mot de passe est inexistant';
     }
 
     if(!empty($_POST['password-login'])){
         $passwordLogin = htmlspecialchars($_POST['password-login']);
 
     }else{
-        $formErrorListLogin['password-login'] = 'Veuillez entrer votre mot de passe';
+        $formErrorListLogin['error'] = 'Votre pseudo ou votre mot de passe est inexistant';
     }
     if ($formErrorListLogin == null) {
         if(key_exists($login,$_SESSION['users'])){
             if ($_SESSION['users'][$login]['password'] == $passwordLogin) {
                 $_SESSION['me']= $login;
+                
                 header('Location: http://utando.fr/main.php');
             }else{
-                $formErrorListLogin = 'Votre pseudo ou votre mot de passe est inexistant';
+                $formErrorListLogin['error'] = 'Votre pseudo ou votre mot de passe est inexistant';
             }
         } else{
-            $formErrorListLogin = 'Votre pseudo ou votre mot de passe est inexistant';
+            $formErrorListLogin['error'] = 'Votre pseudo ou votre mot de passe est inexistant';
         }
     }
 }

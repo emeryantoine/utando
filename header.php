@@ -15,17 +15,23 @@
     <!-- google fonts  -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css?1234567">
+    <link rel="stylesheet" href="assets/css/style.css?0">
 
 </head>
 
-<body class="<?= false ? 'rouge' : 'bleu' ?>"> 
+<body class="<?php if(!empty($_COOKIE[$_SESSION['me']]) && in_array($_COOKIE[$_SESSION['me']],$_SESSION['color'])){
+        echo $_COOKIE[$_SESSION['me']];
+}else{
+    echo $_SESSION['color'][0];
+}
+
+?>"> 
 <!--CHANGER COLOR-->
 
     <!-- header -->
     <header class=" text-center position-relative">
         <div class="logo">
-            <a class="" href="main.php"><img class="img-fluid m-auto" src="assets/img/logo.png" alt="Utando Chocolat"></a>
+           <img class="img-fluid m-auto" src="assets/img/logo.png" alt="Utando Chocolat">
         </div>
         <?php if (!empty($_SESSION['me'])) {  ?>
         <!-- menu connexion-->

@@ -77,7 +77,7 @@ function compatibility(){
                         echo $value; ?> <?php } ?> 
             </p>
             <h3 class="fs-5 font-weight">Mon chocolat</h3>
-            <p class="fs-6 "><?= $_SESSION['chocolat'][$myProfil['chocolat']] ?></p>
+            <p class="fs-6 "><?= $_SESSION['chocolat'][$matchInfo['chocolat']] ?></p>
             <!-- box infos -->
             <div class="">
 

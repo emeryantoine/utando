@@ -13,16 +13,16 @@
                 <form action="?" method="POST">
                     <div class="mb-3">
                         <label for="pseudo-login" class="form-label">Pseudo : </label>
-                        <input type="text" class="form-control <?= !isset($_POST['Connexion']) ? null : (isset($formErrorListLogin['pseudo-login']) ? 'is-invalid' : 'is-valid') ?>" id="pseudo-login" name="pseudo-login" value="<?= !isset($pseudo) ? null : $pseudo ?>" />
-                        <?php if (isset($formErrorListLogin['pseudo-login'])) { ?>
-                            <p><small class="badge bg-danger"><?= $formErrorListLogin['pseudo-login'] ?></small></p>
+                        <input type="text" class="form-control <?= !isset($_POST['Connexion']) ? null : (isset($formErrorListLogin['error']) ? 'is-invalid' : 'is-valid') ?>" id="pseudo-login" name="pseudo-login" value="<?= !isset($pseudo) ? null : $pseudo ?>" />
+                        <?php if (isset($formErrorListLogin['error'])) { ?>
+                            <p><small class="badge bg-danger"><?= $formErrorListLogin['error'] ?></small></p>
                         <?php } ?>
                     </div>
                     <div class="mb-3">
                         <label for="password-login" class="form-label">Mot de passe: </label>
-                        <input type="password" class="form-control <?= !isset($_POST['Connexion']) ? null : (isset($formErrorListLogin['password-login']) ? 'is-invalid' : 'is-valid') ?>" id="password-login" name="password-login" value="<?= !isset($pass) ? null : $pass ?>" />
-                        <?php if (isset($formErrorListLogin['password-login'])) { ?>
-                            <p><small class="badge bg-danger"><?= $formErrorListLogin['password-login'] ?></small></p>
+                        <input type="password" class="form-control <?= !isset($_POST['Connexion']) ? null : (isset($formErrorListLogin['error']) ? 'is-invalid' : 'is-valid') ?>" id="password-login" name="password-login" value="<?= !isset($pass) ? null : $pass ?>" />
+                        <?php if (isset($formErrorListLogin['error'])) { ?>
+                            <p><small class="badge bg-danger"><?= $formErrorListLogin['error'] ?></small></p>
                         <?php } ?>
                     </div>
                     <div class="mb-3">
@@ -72,12 +72,12 @@
                         <legend>Genre :</legend>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" for="gender1">Homme
-                                <input class="form-check-input" type="radio" name="gender" value="homme" id="gender1">
+                                <input class="form-check-input" type="radio" name="gender" value="homme" id="gender1" <?= (isset($gender) && $gender == 'homme') ?'checked' : '' ?>>
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" for="gender2">Femme
-                                <input class="form-check-input" type="radio" name="gender" value="femme" id="gender2">
+                                <input class="form-check-input" type="radio" name="gender" value="femme" id="gender2" <?= (isset($gender) && $gender == 'femme') ?'checked' : '' ?>>
                             </label>
                         </div>
                         <!-- error-->
@@ -92,15 +92,15 @@
                         <legend>Orientation :</legend>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" for="orientation1">Hétéro</label>
-                            <input class="form-check-input" type="radio" name="orientation" id="orientation1" value="hétéro">
+                            <input class="form-check-input" type="radio" name="orientation" id="orientation1" value="hétéro" <?= (isset($orientation) && $orientation == 'hétéro') ?'checked' : '' ?>>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" for="orientation2">Homo</label>
-                            <input class="form-check-input" type="radio" name="orientation" id="orientation2" value="homo">
+                            <input class="form-check-input" type="radio" name="orientation" id="orientation2" value="homo" <?= (isset($orientation) && $orientation == 'homo') ?'checked' : '' ?>>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" for="orientation3">Bi</label>
-                            <input class="form-check-input" type="radio" name="orientation" id="orientation3" value="bi">
+                            <input class="form-check-input" type="radio" name="orientation" id="orientation3" value="bi" <?= (isset($orientation) && $orientation == 'bi') ?'checked' : '' ?>>
 
                         </div>
                         <!-- error-->
@@ -116,17 +116,24 @@
                             <input class="form-control" type="file" id="image" name="image">
                         </div>
                         <!-- error img ?-->
+                        <?php if (isset($formErrorList['image'])) { ?>
+                            <p><small class="badge bg-danger"><?= $formErrorList['image'] ?></small></p>
+                        <?php } ?>
                     </fieldset>
                     <!-- choco-->
                     <fieldset class="mb-3">
                         <legend>Ton chocolat :</legend>
                         <select class="form-select mb-3 <?= !isset($_POST['register']) ?: (isset($formErrorList['chocolat']) ? 'is-invalid' : 'is-valid') ?>" name="chocolat">
-                            <option selected disabled>Qu'est-ce que tu aimes?</option>
+                            <option <?= (!isset($chocolat)) ? 'selected' : '' ?> disabled>Qu'est-ce que tu aimes?</option>
                             <?php
                             foreach ($chocolateList as $key => $value) { ?>
-                                <option <?= (isset($chocolat) && $chocolat == $value) ? 'selected' : null ?> value="<?= $key ?>"><?= $value ?></option>
+                                <option <?= (isset($chocolat) && $chocolat == $key) ? 'selected': '' ?> value="<?= $key ?>"><?= $value ?></option>
                             <?php } ?>
                         </select>
+                        <!-- error chocolat ?-->
+                        <?php if (isset($formErrorList['chocolat'])) { ?>
+                            <p><small class="badge bg-danger"><?= $formErrorList['chocolat'] ?></small></p>
+                        <?php } ?>
                     </fieldset>
                     <!-- musiques -->
                     <fieldset class="mb-3">
@@ -134,7 +141,7 @@
                         <?php
                         foreach ($musicList as $value) {
                         ?><div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="music[]" value="<?= $value ?>" id="<?= $value ?>">
+                                <input <?= (isset($music) && in_array($value,$music)) ? 'checked':'' ?> class="form-check-input" type="checkbox" name="music[]" value="<?= $value ?>" id="<?= $value ?>">
                                 <label class="form-check-label" for="<?= $value ?>">
                                     <?= $value ?>
                                 </label>
