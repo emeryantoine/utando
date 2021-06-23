@@ -39,7 +39,7 @@ $users = [
                 'gender' => 'homme',
                 'orientation' => 'bi',
                 'image' => './assets/profile/profile-bruce.jpg',
-                'chocolat' => 'Blanc',
+                'chocolat' => 'Lait',
                 'music' => ['Pop','Rock','Classique'],
                 'description' => 'Je suis l\'un des artistes les plus populaires aux États-Unis, avec plus de 64 millions d\'albums écoulés, pour un total de plus de 120 millions à travers le monde',
                 'message' => 'Born in the U.S.A' ],
@@ -52,7 +52,7 @@ $users = [
                 'chocolat' => 'Noir',
                 'music' => ['Rap', 'Pop', 'Rock', 'Classique', 'RnB'],
                 'description' => 'Je suis l\'un des rares artistes à avoir connu le succès dans trois différents médias de divertissement aux États-Unis et dans le monde : cinéma, télévision et musique.',
-                'message' => 'Je suis le prince de Bel air' ],
+                'message' => 'Je suis le prince de Bel Air' ],
 
     'Bisbal' => ['password' => 'pwbisbal', 
                 'age' => '42',
@@ -62,7 +62,71 @@ $users = [
                 'chocolat' => 'Blanc',
                 'music' => ['Pop','Rock'],
                 'description' => 'J\'ai quitte assez tôt l\'école parce que je n\'aime pas étudier. J\'ai trouve un travail dans une pépinière. C\'est là que je suis découvert, alors que je travaille en chantant.' ,
-                'message' => 'Ave Maria !' ]
+                'message' => 'Ave Maria !' ],
+
+    'Justin' => ['password' => 'pwjustin', 
+                'age' => '27',
+                'gender' => 'homme',
+                'orientation' => 'hétéro',
+                'image' => './assets/profile/profile-justin.jpg',
+                'chocolat' => 'Lait',
+                'music' => ['Rap', 'Pop', 'Rock', 'Classique', 'RnB'],
+                'description' => 'En 2007, à l\'âge de 13 ans , je suis repéré par  Scooter Braun sur ma chaîne YouTube. L\'année suivante, je signe un contrat avec la maison de disques RBMG Records' ,
+                'message' => 'Je suis dingue' ],
+
+    'Bruno' => ['password' => 'pwbruno', 
+                'age' => '35',
+                'gender' => 'homme',
+                'orientation' => 'bi',
+                'image' => './assets/profile/profile-bruno.jpg',
+                'chocolat' => 'Noir',
+                'music' => ['Rap', 'Pop', 'Rock', 'RnB'],
+                'description' => 'né le 8 octobre 1985 à Honolulu, dans l\'État de Hawaï.. Mes ancêtres sont d\'origine portoricaine, philippine, juive et espagnole.',
+                'message' => 'Ne crois pas, juste regarde' ],
+
+    'Elton' => ['password' => 'pwelton', 
+                'age' => '74',
+                'gender' => 'homme',
+                'orientation' => 'homo',
+                'image' => './assets/profile/profile-elton.jpg',
+                'chocolat' => 'Blanc',
+                'music' => ['Rap', 'Pop', 'Rock', 'Classique', 'RnB'],
+                'description' => 'Je suis Sir Elton Hercules John, Icône pop mondiale, en plus de cinquante ans de carrière, avec plus de 300 millions de disques écoulés, est l\'un des artistes ayant vendu le plus de disques' ,
+                'message' => 'Ne va pas briser mon cœur' ],
+
+    'Ariana' => ['password' => 'pwariana', 
+                'age' => '27',
+                'gender' => 'femme',
+                'orientation' => 'hétéro',
+                'image' => './assets/profile/profile-ariana.jpg',
+                'chocolat' => 'Lait',
+                'music' => ['Pop','Rock','Classique','RnB'],
+                'description' => 'À l\'âge de 10 ans, j\'ai co-fondé un groupe de musique, Kids Who Care, qui a chanté pour de nombreuses associations ; en 2007. J\'ai réussi à récolter 500 000 dollars en chantant en solo',
+                'message' => 'Merci, Suivant' ],
+
+    'Ladygaga' => ['password' => 'pwladygaga', 
+                'age' => '27',
+                'gender' => 'femme',
+                'orientation' => 'bi',
+                'image' => './assets/profile/profile-gaga.jpg',
+                'chocolat' => 'Blanc',
+                'music' => ['Rap', 'Pop', 'Rock', 'Classique', 'RnB'],
+                'description' => 'Mon surnom de Lady Gaga me l\' a donné mon producteur de musique Rob Fusari, puisque au lieu de le saluer d\'un bonjour, je lui chantait Radio Ga Ga, du groupe Queen.',
+                'message' => 'Je veux ta mauvaise romance' ],
+
+    'Maria' => ['password' => 'pwmaria', 
+                'age' => '51',
+                'gender' => 'femme',
+                'orientation' => 'homo',
+                'image' => './assets/profile/profile-maria.jpg',
+                'chocolat' => 'Noir',
+                'music' => ['Pop', 'Rock', 'Classique', 'RnB'],
+                'description' => 'Je suis née d\'un père d\'origine afro-américaine et afro-cubaine, et d\'une mère d\'origine irlandaise, professeur de chant et chanteuse d\'opéra.',
+                'message' => 'Tout ce que je veux pour noël, c\'est toi' ],
+
+
+
+
 ]; // end main tableau 
 
 if (!isset($_SESSION['users'])) {
@@ -378,4 +442,3 @@ if (isset($_POST['Connexion'])) {
         }
     }
 }
-?>
