@@ -129,7 +129,7 @@
                             foreach ($colorList as $value) { ?>
                                 <div class="form-check form-check-inline">
                                     <label for="<?= $value ?>" class="form-check-label"><?= $value ?></label>
-                                    <input class="form-check-input" type="radio" name="color" id="<?= $value ?>" value="<?= $value ?>" <?= ($_COOKIE[$_SESSION['me']] == $value)? 'checked' : '' ?>>
+                                    <input class="form-check-input" type="radio" name="color" id="<?= $value ?>" value="<?= $value ?>" <?= (isset($_COOKIE[$_SESSION['me']]))?(($_COOKIE[$_SESSION['me']] == $value)? 'checked' : '') : (($value == $_SESSION['color'][0])? 'checked' : null) ?>>
                                 </div>
                            <?php } ?>
                         </fieldset>
