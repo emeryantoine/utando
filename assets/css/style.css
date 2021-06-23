@@ -2,8 +2,13 @@
 body {
     font-family: 'Cairo', sans-serif; 
     color:#fff;
-    background-color: #a01616;
     font-size: 0.8rem;
+}
+.rouge{
+    background-color: #a01616;
+}
+.bleu{
+    background-color: #293764;
 }
 header {
     background-color: #000;
