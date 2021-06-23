@@ -122,11 +122,7 @@ $users = [
                 'chocolat' => 'Noir',
                 'music' => ['Pop', 'Rock', 'Classique', 'RnB'],
                 'description' => 'Je suis née d\'un père d\'origine afro-américaine et afro-cubaine, et d\'une mère d\'origine irlandaise, professeur de chant et chanteuse d\'opéra.',
-                'message' => 'Tout ce que je veux pour noël, c\'est toi' ],
-
-
-
-
+                'message' => 'Tout ce que je veux pour noël, c\'est toi' ]
 ]; // end main tableau 
 
 if (!isset($_SESSION['users'])) {
